@@ -1,0 +1,138 @@
+-Distrubuted version control system
+-Command line - fastest and easiest and all inclusive
+-GUI - GitKraken - free for open source
+-GUI - Sourcetree - free for windows or mac
+
+-check git and version
+git --version
+
+git bash - emulates linux evironment
+
+-setting
+-system - all users of the current computer
+-global - all repos of current user
+-local - current repo
+git config --global user.name "Nate Argaw"
+git config --global user.email nateargaw@gmail.com
+-no quotes necessary if there is no space
+
+-edit all global settings
+git config --global -e
+
+-configure how git handles end of lines for interoprability
+-windows - \r (carriage return) and \n (line feed)
+-mac and linux - \n (line feed)
+git config --global core.autocrlf true (windows)
+git config --global core.autocrlf input (mac or linux)
+
+-get help from git 
+git config --help (detailed)
+git config -h (simple)
+
+-init
+mkdir Jelly
+cd Jelly
+git init
+ls -a (show hidden git file)
+
+-staging area - proposed snapshot before recording snapshot
+-can unstage snapshot
+-commit - snapshot saved in .git file
+-commit includes ID, Message, Date/Time, Author and complete snapshot
+
+-example
+echo hello > file1.js
+echo hello2 > file2.js
+
+-check status
+git status  (full status)
+
+-add files to staging area
+git add . (all files)
+git add *.js (all files ending with .js)
+git add file1.js (file1.js only)
+git add file1.js file2.js (file1.js and file2.js only)
+
+-see unstaged changes
+git add file1.js file2.js (file1.js and file2.js only)
+echo world >> file2.js
+git status
+-shows unstaged changes to file2.js
+
+-commit files (save snapshot)
+git commit
+-opens a file 
+-I for insert
+-Type short description (80chars or less)
+-Line break
+-Type long description 
+
+-commit etiquette
+-commit not too much 
+-commit not too little
+-separate commits for specific portions of code 
+-meaningful commit messages
+-commit wording present or past tense (most use present tense)
+
+-remove file1.js
+rm file1.js
+git add file1.js (we add it to the staging area even though we are deleteing the file) 
+git commit -m "remove unused code"
+-alternatively
+git rm file1.js (removes file from directory and staging area)
+
+-rename file2.js
+mv file2.js hello.js
+-stage both stages
+git add file2.js
+git add hello.js
+git status 
+-alternatively
+git mv file2.js hello.js (renames file in directory and staging area)
+
+-git ignore
+mkdir logs
+echo hello > logs/dev.log
+-in the root of the project
+logs/ > .gitignore
+-list any directory (logs/)
+-specific files (main.log)
+-patterns (*.log)
+
+-previously commited files that need to be ignored by git
+mkdir bin
+echo test > bin/app.bin
+git add .
+git commit -m "added a bin dir and file"
+bin/ >> .gitignore
+git ls-files (shows files in the staging area(index))
+-remove file from staging area recursively
+git rm --cached -r bin/
+git status
+git add .gitignore
+git commit -m "added bin to git ignore"
+
+git status -s (short)
+-left: staging area
+-right: working directory
+-M: modified
+-A: added
+?? untracked
+
+-view history
+git log
+git log --oneline
+git log --reverse (oldest to newest)
+
+git show HEAD (shows last commit)
+git show HEAD~1 (1 step before last commit)
+git show HEAD:file.js (show version of file.js)
+git ls-tree HEAD~1
+
+-unstage files
+git restore --staged file.js
+git restore . (discard all local changes except untracked)
+git clean -fd (remove untracked files (f - force) (d-directory))
+git restore --staged file.js
+
+
