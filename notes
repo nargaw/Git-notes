@@ -123,6 +123,7 @@ git status -s (short)
 git log
 git log --oneline
 git log --reverse (oldest to newest)
+git log --all --graph
 
 git show HEAD (shows last commit)
 git show HEAD~1 (1 step before last commit)
@@ -135,4 +136,46 @@ git restore . (discard all local changes except untracked)
 git clean -fd (remove untracked files (f - force) (d-directory))
 git restore --staged file.js
 
+-create branch
+-use case: Not alter master code when working on some test code
+git branch feature1 //create a new branch called feature1
+git checkout feature1 //switch to the feature1 branch
+git checkout master //switch back to master branch
 
+-merge a feature
+git checkout master // switch to master first
+git merge feature1 -m "merge feature1" //add changes from feature1 to the current branch (master)
+
+-feature branch workflow
+1. Create feature branch
+git branch new-feature //create new branch called new-feature
+
+2. Upload to Github
+-get the github link and add remote
+git remote add origin [link] //origin is the nickname of the github repo
+-upload master
+git checkout master //switch to master branch
+git push origin master //push master branch (master) to the github repo (origin)
+-upload feature branch
+git checkout new-feature //switch to new-feature branch
+git push origin new-feature //push new-feature branch (new-feature) to the github repo (origin)
+
+3. Create pull request
+-go to pull request tab and click on create pull request
+-top bar arrow points in the direction of the merge (new feature points to master branch)
+-add title of the pull request
+-add description of the pull request
+-submit pull request
+-code reviewer can look at code for code review
+-comments and conversation 
+
+4. Merge feature branch
+-clik on merge pull request
+-done by the code-reviewer
+
+-finally update master branch in local repo
+git checkout master //switch to master branch
+git pull origin master//get the new merged code from origin to the master branch
+
+-delete a branch
+git branch -D new-feature
